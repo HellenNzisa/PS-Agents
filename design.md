@@ -76,6 +76,7 @@ graph LR
 
 ### Search Tree
 For the search tree, the root is Nairobi and each town is expanded into the towns it connects to. A branch stops when it reaches kisumu, each box shows the town and g the distance.
+Abstraction is applied in this tree because only the junction towns from the graph appear and no branch goes back to a town already in its path
 
 ===== SEARCH TREE =====
 
