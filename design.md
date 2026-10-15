@@ -1,3 +1,38 @@
+# 1. The self driving Trailer 
+Using the PEAS framework this is how this agent can be 
+
+# Performance measure can be observe on :
+- Safe arrival with no collisions or damage of the packages 
+- A short travel time(on time delivery) and low fuel consumption 
+- Following the traffic rules and speed limits 
+
+# Environment the agent will operate in :
+- The Kenya Highway for instance Nairobi to Kisumu this journey can include towns,junctions.
+-Other vehicles like matatus,motorbikes,pedestrians 
+- considering the road condition,weather and police checkpoint 
+
+# Actuators that the agent can have to operate
+- The trailer steering
+- Accelarator and brakes  
+- Gear selection 
+- Indicators ,headlights and horn
+- Displays units for alerts 
+
+# Sensors that will allow the trailer to communicate with its environment 
+- GPS and any digital map data 
+- Cameras at the front,back and corners for lane ,signs and obstacles detection 
+- A radar(or LiDAR for 3D vision) to compensate the cameras on weather challenges 
+- A Speedometer for checking on speed limits and odometer to measure the destination travelled to compare against the GPS information
+- Weather and raod surfaces sensors 
+-Fuel gauge to allow the agents to know when it needs to refuel 
+- Trailer load to keep on check of the packages the trailer can handle without risk  
+- Tyre pressure sensors to support on the risk of blowouts 
+
+# Defining more further this agent on its environment properties 
+
+The self driving trailer analysis is as follow 
+
+
 
 
 
