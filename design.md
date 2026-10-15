@@ -46,8 +46,6 @@ The self driving trailer analysis is as follows :
 
 
 
-
-
 ## 2. develop a suitable directed graph and search tree based on the map presented in class of Kenya’s Highway Network
 
 **Abstraction** is where we will remove details that will do not help the agent in deciding its route. In this case this means
@@ -166,3 +164,117 @@ graph TD
     T19["Kisumu<br/>g=384"]
     T18 -->|84| T19
 ```
+
+
+
+## 3. Finding the Optimal Path Using Uniform Cost Search (UCS)
+
+We used **Uniform Cost Search (UCS)** to find the shortest route from Nairobi to Kisumu. UCS expands the path with the lowest total cost first.
+
+The path cost, `g(n)`, is calculated by adding the distances travelled from Nairobi to the current town. We choseit also because fo the familiriaty we have with the concept.
+
+### Step 1: Expand Nairobi
+
+| Path | State 0 | State 1 | Cost `g(n)` |
+|---|---|---|---:|
+| A | Nairobi | Thika | 45 |
+| B | Nairobi | Naivasha | 91 |
+| C | Nairobi | Narok | 143 |
+
+**Selection:** We selected **Thika (45 km)** because it had the lowest cost.
+
+### Step 2: Expand Thika
+
+Thika leads to Nyeri, adding 113 km: `45 + 113 = 158 km`.
+
+| Path | State 0 | State 1 | State 2 | Cost `g(n)` |
+|---|---|---|---|---:|
+| B | Nairobi | Naivasha | - | 91 |
+| C | Nairobi | Narok | - | 143 |
+| D | Nairobi | Thika | Nyeri | 158 |
+
+**Selection:** We selected **Naivasha (91 km)** because it had the lowest cost.
+
+### Step 3: Expand Naivasha
+
+Naivasha leads to Nakuru, adding 70 km: `91 + 70 = 161 km`.
+
+| Path | State 0 | State 1 | State 2 | Cost `g(n)` |
+|---|---|---|---|---:|
+| C | Nairobi | Narok | - | 143 |
+| D | Nairobi | Thika | Nyeri | 158 |
+| E | Nairobi | Naivasha | Nakuru | 161 |
+
+**Selection:** We selected **Narok (143 km)** because it had the lowest cost.
+
+### Step 4: Expand Narok
+
+Narok leads to Kericho, adding 157 km: `143 + 157 = 300 km`.
+
+| Path | State 0 | State 1 | State 2 | Cost `g(n)` |
+|---|---|---|---|---:|
+| D | Nairobi | Thika | Nyeri | 158 |
+| E | Nairobi | Naivasha | Nakuru | 161 |
+| F | Nairobi | Narok | Kericho | 300 |
+
+**Selection:** We selected **Nyeri (158 km)** because it had the lowest cost.
+
+### Step 5: Expand Nyeri
+
+Nyeri leads to Nakuru, giving a total cost of `45 + 113 + 167 = 325 km`. We discarded this path because Nakuru was already reachable at a lower cost of 161 km.
+
+| Path | State 0 | State 1 | State 2 | Cost `g(n)` |
+|---|---|---|---|---:|
+| E | Nairobi | Naivasha | Nakuru | 161 |
+| F | Nairobi | Narok | Kericho | 300 |
+
+**Selection:** We selected **Nakuru (161 km)** because it had the lowest cost.
+
+### Step 6: Expand Nakuru
+
+Nakuru leads to Kericho and Eldoret.
+
+- Kericho: `161 + 107 = 268 km`.
+- Eldoret: `161 + 156 = 317 km`.
+
+The earlier path to Kericho through Narok cost 300 km, so we discarded it and kept the cheaper route through Nakuru.
+
+| Path | State 0 | State 1 | State 2 | State 3 | Cost `g(n)` |
+|---|---|---|---|---|---:|
+| G | Nairobi | Naivasha | Nakuru | Kericho | 268 |
+| H | Nairobi | Naivasha | Nakuru | Eldoret | 317 |
+
+**Selection:** We selected **Kericho (268 km)** because it had the lowest cost.
+
+### Step 7: Expand Kericho
+
+Kericho leads to Kisumu, adding 84 km: `268 + 84 = 352 km`.
+
+| Path | State 0 | State 1 | State 2 | State 3 | State 4 | Cost `g(n)` |
+|---|---|---|---|---|---|---:|
+| H | Nairobi | Naivasha | Nakuru | Eldoret | - | 317 |
+| G | Nairobi | Naivasha | Nakuru | Kericho | Kisumu | 352 |
+
+**Selection:** We selected **Eldoret (317 km)** because it had the lowest cost.
+
+### Step 8: Expand Eldoret
+
+Eldoret leads to Kakamega, adding 80 km: `317 + 80 = 397 km`.
+
+| Path | State 0 | State 1 | State 2 | State 3 | State 4 | Cost `g(n)` |
+|---|---|---|---|---|---|---:|
+| G | Nairobi | Naivasha | Nakuru | Kericho | Kisumu | 352 |
+| H | Nairobi | Naivasha | Nakuru | Eldoret | Kakamega | 397 |
+
+**Selection:** We selected **Kisumu (352 km)** because it had the lowest cost. Since Kisumu is the goal, UCS terminates.
+
+### Final Result
+
+
+The optimal path found by Uniform Cost Search is:
+
+**Nairobi → Naivasha → Nakuru → Kericho → Kisumu**
+
+Total distance:
+
+`91 + 70 + 107 + 84 = 352 km`
