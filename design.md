@@ -8,7 +8,7 @@ Using the PEAS framework this is how this agent can be
 
 # Environment the agent will operate in :
 - The Kenya Highway for instance Nairobi to Kisumu this journey can include towns,junctions.
--Other vehicles like matatus,motorbikes,pedestrians 
+- Other vehicles like matatus,motorbikes,pedestrians 
 - considering the road condition,weather and police checkpoint 
 
 # Actuators that the agent can have to operate
@@ -24,14 +24,25 @@ Using the PEAS framework this is how this agent can be
 - A radar(or LiDAR for 3D vision) to compensate the cameras on weather challenges 
 - A Speedometer for checking on speed limits and odometer to measure the destination travelled to compare against the GPS information
 - Weather and raod surfaces sensors 
--Fuel gauge to allow the agents to know when it needs to refuel 
+- Fuel gauge to allow the agents to know when it needs to refuel 
 - Trailer load to keep on check of the packages the trailer can handle without risk  
 - Tyre pressure sensors to support on the risk of blowouts 
 
 # Defining more further this agent on its environment properties 
 
-The self driving trailer analysis is as follow 
+The self driving trailer analysis is as follows :
 
+- It is partially observable: The agent's sensors can't see everything.It can't see around a blind bend on an escarpment, behind a large truck,or know about an accident ahead until it gets close.
+
+- Stochastic :The road has many unpredictable events and uncertainties,the next state is not fully determined  by the agent's action from traffic behaviour ,weather to breakdowns .
+
+- Sequential :because each decision affects the later ones ;The route chosen at Nairobi determines which towns are reachable next ,the speed and lanes choices .All these will affect the overall performance of the agent later 
+
+- Dynamic :because the environment keeps changing while the agent is deciding .
+
+- Continuous :The primary metrics are continuous values rather than discrete for instance speed,position, steering angle ,time 
+
+- Multi-agent:The environment has other agents which are both cooperative and competitive and whose actions are based on their own goals and those actions affect directly whether the trailer will reach its goal safely or not . 
 
 
 
